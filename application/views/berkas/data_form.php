@@ -92,7 +92,7 @@
                                             $berkas = $row->NAMA_BERKAS;
                                         }
                                     ?>
-                                    <form method="post" enctype="multipart/form-data" action="<?php echo base_url(); ?>index.php/upload/proses">
+                                    <form method="post" enctype="multipart/form-data" action="<?php echo site_url('upload/proses'); ?>">
                                         <div class="form group">
                                             <label for="" class="form-control-label">ID PENULIS <?php echo form_error('NO_USER') ?></label>
                                             <input type="text" name="NO_USER" class="form-control" value="<?= $no_user ?>">
@@ -127,7 +127,7 @@
                                         </div>
                                         <div class="form group">
                                             <label for="" class="form-control-label">TAHUN <?php echo form_error('TAHUN_DATA') ?></label>
-                                            <input type="year" name="TAHUN_DATA" class="form-control" value="<?= $tahun ?>">
+                                            <input type="text" name="TAHUN_DATA" class="form-control" value="<?= $tahun ?>">
                                         </div>
                                         <div class="form group">
                                             <label for="" class="form-control-label">FILE PDF</label>

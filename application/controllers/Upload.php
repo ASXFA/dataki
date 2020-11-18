@@ -14,6 +14,7 @@ class Upload extends CI_Controller {
         $this->load->model('M_jenis');
         $data['getBidang'] = $this->M_bidang->get_all();
         $data['getJenis'] = $this->M_jenis->get_all();
+        $data['url'] = site_url('upload/proses');
 		$this->load->view('template/header');
 		$this->load->view('berkas/data_form',$data);
 		$this->load->view('template/footer');
@@ -34,14 +35,15 @@ class Upload extends CI_Controller {
 			if ( ! $this->upload->do_upload('berkas'))
 			{
 				$data['error'] = array('error' => $this->upload->display_errors());
-				echo $this->upload->display_errors();
-				// $this->load->model('M_bidang');
-				// $this->load->model('M_jenis');
-				// $data['getBidang'] = $this->M_bidang->get_all();
-				// $data['getJenis'] = $this->M_jenis->get_all();
-				// $this->load->view('template/header');
-				// $this->load->view('berkas/data_form', $data);
-				// $this->load->view('template/footer');
+				// echo $this->upload->display_errors();
+				$this->load->model('M_bidang');
+				$this->load->model('M_jenis');
+				$data['getBidang'] = $this->M_bidang->get_all();
+				$data['getJenis'] = $this->M_jenis->get_all();
+				$data['url'] = site_url('upload/proses');
+				$this->load->view('template/header');
+				$this->load->view('berkas/data_form', $data);
+				$this->load->view('template/footer');
 			}
 			else
 			{
@@ -51,9 +53,7 @@ class Upload extends CI_Controller {
 				$data['ABSTRAK_DATA'] = $this->input->post('ABSTRAK_DATA');
 				$data['BIDANG_DATA'] = $this->input->post('BIDANG_DATA');
 				$data['JENIS_DATA'] = $this->input->post('JENIS_DATA');
-				$tahun = date('Y',strtotime($this->input->post('TAHUN_DATA')));
-				$data['TAHUN_DATA'] = $tahun;
-				echo $tahun;
+				$data['TAHUN_DATA'] = $this->input->post('TAHUN_DATA');
 				// $data['ABSTRAK_DATA'] = $this->input->post('keterangan_berkas');
 				$data['NAMA_BERKAS'] = $this->upload->data("file_name");
 				// $data['ABSTRAK_DATA'] = $this->input->post('keterangan_berkas');

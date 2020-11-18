@@ -143,6 +143,7 @@ class Karya extends CI_Controller
             $data['getBidang'] = $this->M_bidang->get_all();
             $data['getJenis'] = $this->M_jenis->get_all();
             $data['bidang_data'] = $this->M_bidang->get_all_asc();
+            $data['url'] = site_url('karya/update_action/');
             $this->load->view('template/header');
             $this->load->view('berkas/data_form', $data);
             $this->load->view('template/footer');
@@ -153,27 +154,50 @@ class Karya extends CI_Controller
         }
     }
     
-    public function update_action() 
+    public function update_action($id) 
     {
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
             $this->update($this->input->post('ID_DATA', TRUE));
         } else {
-            $data = array(
-		'NO_USER' => $this->input->post('NO_USER',TRUE),
-		'NAME' => $this->input->post('NAME',TRUE),
-		'JUDUL_DATA' => $this->input->post('JUDUL_DATA',TRUE),
-		'ABSTRAK_DATA' => $this->input->post('ABSTRAK_DATA',TRUE),
-        'BIDANG_DATA' => $this->input->post('BIDANG_DATA',TRUE),
-        'JENIS_DATA' => $this->input->post('JENIS_DATA',TRUE),
-		'TAHUN_DATA' => $this->input->post('TAHUN_DATA',TRUE),
-		'NAMA_BERKAS' => $this->input->post('NAMA_BERKAS',TRUE),
-	    );
+            $config['upload_path']          = './uploads/';
+			$config['allowed_types']        = 'pdf';
+			// $config['max_width']            = 1024;
+			// $config['max_height']           = 768;
+			$config['encrypt_name']			= TRUE;
+			$this->load->library('upload', $config);
+			if ( ! $this->upload->do_upload('berkas'))
+			{
+                $data = array(
+                    'NO_USER' => $this->input->post('NO_USER',TRUE),
+                    'NAME' => $this->input->post('NAME',TRUE),
+                    'JUDUL_DATA' => $this->input->post('JUDUL_DATA',TRUE),
+                    'ABSTRAK_DATA' => $this->input->post('ABSTRAK_DATA',TRUE),
+                    'BIDANG_DATA' => $this->input->post('BIDANG_DATA',TRUE),
+                    'JENIS_DATA' => $this->input->post('JENIS_DATA',TRUE),
+                    'TAHUN_DATA' => $this->input->post('TAHUN_DATA',TRUE),
+                    'NAMA_BERKAS' => $this->input->post('berkas_old',TRUE)
+                );
+                $this->M_karya->update($id, $data);
+                $this->session->set_flashdata('message', 'Update Record Success');
+                redirect(site_url('karya'));
+            }else{
+                $data = array(
+                    'NO_USER' => $this->input->post('NO_USER',TRUE),
+                    'NAME' => $this->input->post('NAME',TRUE),
+                    'JUDUL_DATA' => $this->input->post('JUDUL_DATA',TRUE),
+                    'ABSTRAK_DATA' => $this->input->post('ABSTRAK_DATA',TRUE),
+                    'BIDANG_DATA' => $this->input->post('BIDANG_DATA',TRUE),
+                    'JENIS_DATA' => $this->input->post('JENIS_DATA',TRUE),
+                    'TAHUN_DATA' => $this->input->post('TAHUN_DATA',TRUE),
+                    'NAMA_BERKAS' => $this->input->post('berkas',TRUE)
+                );
 
-            $this->M_karya->update($this->input->post('ID_DATA', TRUE), $data);
-            $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('karya'));
+                $this->M_karya->update($id, $data);
+                $this->session->set_flashdata('message', 'Update Record Success');
+                redirect(site_url('karya'));
+            }
         }
     }
     
@@ -200,7 +224,7 @@ class Karya extends CI_Controller
     $this->form_validation->set_rules('BIDANG_DATA', 'bidang konsentrasi', 'trim|required');
     $this->form_validation->set_rules('JENIS_DATA', 'bidang', 'trim|required');
 	$this->form_validation->set_rules('TAHUN_DATA', 'tahun data', 'trim|required');
-	$this->form_validation->set_rules('NAMA_BERKAS', 'nama berkas', 'trim|required');
+	// $this->form_validation->set_rules('NAMA_BERKAS', 'nama berkas', 'trim|required');
 
 	$this->form_validation->set_rules('ID_DATA', 'ID_DATA', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

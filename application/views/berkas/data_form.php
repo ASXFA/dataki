@@ -79,9 +79,11 @@
                                         $abstrak="";
                                         $bidang_data="";
                                         $jenis_data=0;
+                                        $id_data=0;
                                         $tahun="";
                                         $berkas="";
                                         if (isset($row)) {
+                                            $id_data = $row->ID_DATA; 
                                             $no_user = $row->NO_USER;
                                             $name = $row->NAME;
                                             $judul=$row->JUDUL_DATA;
@@ -92,7 +94,7 @@
                                             $berkas = $row->NAMA_BERKAS;
                                         }
                                     ?>
-                                    <form method="post" enctype="multipart/form-data" action="<?php echo site_url('upload/proses'); ?>">
+                                    <form method="post" enctype="multipart/form-data" action="<?php echo $url ?><?php if($id_data != 0){echo $id_data;} ?>">
                                         <div class="form group">
                                             <label for="" class="form-control-label">ID PENULIS <?php echo form_error('NO_USER') ?></label>
                                             <input type="text" name="NO_USER" class="form-control" value="<?= $no_user ?>">
@@ -127,11 +129,18 @@
                                         </div>
                                         <div class="form group">
                                             <label for="" class="form-control-label">TAHUN <?php echo form_error('TAHUN_DATA') ?></label>
-                                            <input type="text" name="TAHUN_DATA" class="form-control" value="<?= $tahun ?>">
+                                            <input type="year" name="TAHUN_DATA" class="form-control" value="<?= $tahun ?>">
                                         </div>
                                         <div class="form group">
                                             <label for="" class="form-control-label">FILE PDF</label>
-                                            <input type="file" name="berkas" class="form-control" value="<?= $berkas ?>">
+                                            <?php 
+                                                if ($berkas != '') {
+                                            ?>
+                                            <input type="text" name="berkas_old" class="form-control" value="<?= $berkas ?>" readonly>
+                                            <?php
+                                                }
+                                            ?>
+                                            <input type="file" name="berkas" class="form-control">
                                         </div>
                                         <br>
                                         <div class="form-group">

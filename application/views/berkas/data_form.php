@@ -78,7 +78,7 @@
                                         $judul="";
                                         $abstrak="";
                                         $bidang_data="";
-                                        $jenis_data="";
+                                        $jenis_data=0;
                                         $tahun="";
                                         $berkas="";
                                         if (isset($row)) {
@@ -149,7 +149,8 @@
     <script>
         $(document).ready(function(){
             var id = $('#bidang_data').val();
-            if (id) {
+            if (id != 'PILIH') {
+                var jenis = <?php echo $jenis_data ?>;
                 $.ajax({
                     method:'POST',
                     dataType:'JSON',
@@ -160,7 +161,7 @@
                         var i =0;
                         for(i; i<result.length; i++){
                             html += "<option value='"+result[i].ID_JENIS+"'";
-                            if (result[i].ID_JENIS == <?= $jenis_data ?>) {
+                            if (result[i].ID_JENIS ==  jenis) {
                                 html += 'selected';
                             }
                             html += ">"+result[i].JENIS_DATA+"</option>";
@@ -168,7 +169,8 @@
                         $('#jenis_data').html(html);
                     }
                 })
-            }
+            }else{
+
             $('#bidang_data').change(function(){
                 var id_bidang = $('#bidang_data').val();
                 $.ajax({
@@ -186,5 +188,6 @@
                     }
                 })
             })
+            }
         })
     </script>

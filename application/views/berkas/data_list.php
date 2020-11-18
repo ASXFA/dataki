@@ -67,7 +67,13 @@
                                             <td><?php echo $h['NAME']; ?></td>
                                             <td><?php echo nl2br(str_replace($h['KATA'],"<font color='red'><b>".$h['KATA']."</b></font>",strtolower($h['JUDUL_DATA']))) ?></td>
                                             <!-- <td><?php echo $h['ABSTRAK_DATA']; ?></td> -->
-                                            <td><?php echo $h['BIDANG_DATA']; ?></td>
+                                            <td><?php 
+                                                foreach($bidang as $b):
+                                                    if ($h['BIDANG_DATA'] == $b->ID_BIDANG) {
+                                                        echo $b->BIDANG_DATA;
+                                                    }
+                                                endforeach;
+                                            ?></td>
                                             <td><?php echo $h['TAHUN_DATA']; ?></td>
                                             <!-- <td><img width="100 " src="<?php echo base_url(); ?>uploads/<?php $h['NAMA_BERKAS']; ?>"/></td> -->
                                             
@@ -108,7 +114,11 @@
                                             <td><?php echo $row->NAME; ?></td>
                                             <td><?php echo $row->JUDUL_DATA; ?></td>
                                             <!-- <td><?php echo $row->ABSTRAK_DATA; ?></td> -->
-                                            <td><?php echo $row->BIDANG_DATA; ?></td>
+                                            <td><?php foreach($bidang as $b):
+                                                    if ($row->BIDANG_DATA == $b->ID_BIDANG) {
+                                                        echo $b->BIDANG_DATA;
+                                                    }
+                                                endforeach; ?></td>
                                             <td><?php echo $row->TAHUN_DATA; ?></td>
                                             <!-- <td><img width="100 " src="<?php echo base_url(); ?>uploads/<?php echo $row->NAMA_BERKAS; ?>"/></td> -->
                                             

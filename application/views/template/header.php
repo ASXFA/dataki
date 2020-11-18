@@ -206,8 +206,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </span>
           </a>
           <ul class="treeview-menu">
-          <li><a href="<?php echo site_url('bidang/get_bidang/KEMANAN JARINGAN');?>"><i class="fa fa-bolt"></i>Keamanan Jaringan</a></li>
-            <li><a href="<?php echo site_url('bidang/get_bidang/KEMANAN WEBSITE');?>"><i class="fa fa-bug"></i>Keamanan Website</a></li>
+          <li><a href="<?php echo site_url('bidang/get_bidang/KEAMANAN JARINGAN');?>"><i class="fa fa-bolt"></i>Keamanan Jaringan</a></li>
+            <li><a href="<?php echo site_url('bidang/get_bidang/KEAMANAN WEBSITE');?>"><i class="fa fa-bug"></i>Keamanan Website</a></li>
             <!-- <li><a href="<?php echo site_url('bidang/get_bidang/JARINGAN');?>"><i class="fa fa-wifi"></i>Codeigniter</a></li> -->
             <!-- <li><a href="<?php echo site_url('bidang/get_bidang/SECURITY');?>"><i class="fa fa-expeditedssl"></i>PHP Native</a></li> -->
             <!-- <li><a href="<?php echo site_url('bidang/get_bidang/ANDROID');?>"><i class="fa fa-android"></i>Android</a></li>
@@ -245,7 +245,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MY ACCOUNT</li>
         <!-- <li><a href="#"><i class="fa fa-user text-aqua"></i> <span>My Profile</span></a></li> -->
-        <li><a href="#"><i class="fa fa-asterisk text-yellow"></i> <span>Change Password</span></a></li>
+        <li><a href="<?php echo site_url('login/changePassword') ?>"><i class="fa fa-asterisk text-yellow"></i> <span>Change Password</span></a></li>
         <li><a href="<?php echo site_url('login/logout');?>"><i class="fa fa-sign-out text-red"></i> <span>Sign Out</span></a></li>
       </ul>
       

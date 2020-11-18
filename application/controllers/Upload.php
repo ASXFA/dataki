@@ -89,8 +89,7 @@ class Upload extends CI_Controller {
 		$this->form_validation->set_rules('BIDANG_DATA', 'bidang konsentrasi', 'trim|required');
 		$this->form_validation->set_rules('jenis_data', 'bidang', 'trim|required');
 		$this->form_validation->set_rules('TAHUN_DATA', 'tahun data', 'trim|required');
-		$this->form_validation->set_rules('berkas', 'nama berkas', 'trim|required');
-
+		
 		$this->form_validation->set_rules('ID_DATA', 'ID_DATA', 'trim');
 		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }

@@ -74,8 +74,13 @@ class Bidang extends CI_Controller
         //     'total_rows' => $config['total_rows'],
         //     'start' => $start,
         // );
-        $this->db->where('BIDANG_DATA',$q);
+        $this->load->model('M_jenis');
+        $this->load->model('M_bidang');
+        $decode = urldecode($q);
+        $cek = $this->M_jenis->getByNama($decode);
+        $this->db->where('JENIS_DATA',$cek->ID_JENIS);
         $data['berkas'] = $this->db->get('tb_data');
+        $data['bidang'] = $this->M_bidang->get_all();
         $this->load->view('template/header');
         $this->load->view('berkas/data_list', $data);
         $this->load->view('template/footer');

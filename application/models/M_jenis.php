@@ -56,6 +56,17 @@ class M_jenis extends CI_Model
         return $this->db->get('tb_jenis');
     }
 
+    function getByNama($nama)
+    {
+        $this->db->where('JENIS_DATA',$nama);
+        $query = $this->db->get('tb_jenis')->row();
+        if ($query) {
+            return $query;
+        }else{
+            return FALSE;
+        }
+    }
+
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);

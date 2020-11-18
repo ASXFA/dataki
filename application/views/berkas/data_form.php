@@ -130,7 +130,7 @@
                                             <input type="year" name="TAHUN_DATA" class="form-control" value="<?= $tahun ?>">
                                         </div>
                                         <div class="form group">
-                                            <label for="" class="form-control-label">FILE PDF <?php echo form_error('berkas') ?></label>
+                                            <label for="" class="form-control-label">FILE PDF</label>
                                             <input type="file" name="berkas" class="form-control" value="<?= $berkas ?>">
                                         </div>
                                         <br>

@@ -20,7 +20,20 @@ class M_users extends CI_Model
 		$this->db->where("NO_USER",$username);
 		$this->db->where("PASSWORD",$password);
 		return $this->db->get("tb_users")->row();
-	}
+    }
+    
+    function loginCek($username,$password) {
+		$this->db->where("NO_USER",$username);
+		$this->db->where("PASSWORD",$password);
+		return $this->db->get("tb_users");
+    }
+    
+    function gantiPassword($ids,$pass)
+    {
+        $data = array('PASSWORD'=>$pass);
+        $this->db->where('ID_USER',$ids);
+        return $this->db->update('tb_users',$data);
+    }
     function get_all()
     {
         $this->db->order_by($this->id, $this->order);
